@@ -84,7 +84,22 @@ class Admin extends CI_Controller{
 
   // -------------------- Pemberitahuan -------------------
   function pemberitahuan(){
-    $data['DataPeminjam'] = $this->M_admin->peminjam()
-    $this->load->view('admin/pemberitahuan/v_pemberitahuan');
+    $idPinjaman = [];
+    $tglPeminjam = [];
+    $namaPeminjam = [];
+    $cekData = $this->M_admin->loadPemberitahuan();
+    for ($i=0; $i < count($cekData) ; $i++) {
+      array_push($idPinjaman, $cekData[$i]->no_pinjaman);
+      array_push($namaPeminjam, $cekData[$i]->nama);
+    }
+    for ($i=0; $i < count($idPinjaman); $i++) {
+      array_push($tglPeminjam, $this->M_admin->tglBarang($idPinjaman[$i]));
+    }
+
+    $data['idPeminjam'] = $idPinjaman;
+    $data['namaPeminjam'] = $namaPeminjam;
+    $data['tglPinjam'] = $tglPeminjam;
+
+    $this->load->view('admin/pemberitahuan/v_pemberitahuan', $data);
   }
 }
