@@ -97,11 +97,12 @@
                           </tr>
                           </thead>
                           <tbody>
-
+                            <?php $no=1; ?>
                             <?php foreach ($peminjam as $value): ?>
 
                           <tr>
-                            <td>1</td>
+                            <td><?php echo $no; ?></td>
+                            <?php $no++; ?>
                             <td><?php echo $value->nama_barang; ?></td>
                             <td><?php echo $value->jml_pinjam; ?></td>
 

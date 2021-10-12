@@ -70,36 +70,14 @@ class Admin extends CI_Controller{
     }
   }
 
-  function editBarang(){
-    $idBarang = $this->uri->segment(3);
-    $data['eBarang'] = $this->M_admin->editBarang($idBarang);
-    $this->load->view('admin/barang/v_editBarang', $data);
-  }
+  // function editBarang(){
+  //   $idBarang = $this->uri->segment(3);
+  //   $data = array()
+  // }
 
 
   // ----------------------- Peminjam -----------------------------------------
   function peminjam(){
     $this->load->view('admin/peminjam/v_peminjam');
-  }
-
-  // -------------------- Pemberitahuan -------------------
-  function pemberitahuan(){
-    $idPinjaman = [];
-    $tglPeminjam = [];
-    $namaPeminjam = [];
-    $cekData = $this->M_admin->loadPemberitahuan();
-    for ($i=0; $i < count($cekData) ; $i++) {
-      array_push($idPinjaman, $cekData[$i]->no_pinjaman);
-      array_push($namaPeminjam, $cekData[$i]->nama);
-    }
-    for ($i=0; $i < count($idPinjaman); $i++) {
-      array_push($tglPeminjam, $this->M_admin->tglBarang($idPinjaman[$i]));
-    }
-
-    $data['idPeminjam'] = $idPinjaman;
-    $data['namaPeminjam'] = $namaPeminjam;
-    $data['tglPinjam'] = $tglPeminjam;
-
-    $this->load->view('admin/pemberitahuan/v_pemberitahuan', $data);
   }
 }

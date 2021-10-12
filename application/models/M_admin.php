@@ -33,19 +33,4 @@ class M_admin extends CI_Model{
     return $this->db->delete('barang', $data);
   }
 
-  function editBarang($data){
-    $sql = "SELECT * FROM barang WHERE no_barang='$data'";
-    return $this->db->query($sql)->result();
-  }
-
-  // ------------------------ Pemberitahuan -----------------------------
-  function loadPemberitahuan(){
-    $sql = "SELECT peminjam.no_pinjaman, members.nama FROM peminjam JOIN members WHERE peminjam.id_member=members.id_member AND peminjam.status=0";
-    return $this->db->query($sql)->result();
-  }
-  function tglBarang($data){
-    $sql = "SELECT tgl_pinjam, tgl_kembali FROM peminjam_has_barang WHERE no_pinjaman='$data' AND status=0";
-    return $this->db->query($sql)->row();
-  }
-
 }

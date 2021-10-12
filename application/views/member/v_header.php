@@ -221,13 +221,13 @@ desired effect
 
 
 
-        <li class=""><a href="<?php echo site_url('member/profileDiri'); ?>"><i class="fa fa-list-alt"></i> <span>Profile Diri</span></a></li>
+        <li class=""><a href="<?php echo site_url('guru/list_diskusi'); ?>"><i class="fa fa-list-alt"></i> <span>Profile Diri</span></a></li>
 
         <li class=""><a href="<?php echo site_url('guru/list_diskusi'); ?>"><i class="fa fa-list-alt"></i> <span>Profile Desa</span></a></li>
 
-        <li class=""><a href="<?php echo site_url('member/barang'); ?>"><i class="fa fa-list-alt"></i> <span>Stok barang</span></a></li>
+        <li class=""><a href="<?php echo site_url('guru/list_diskusi'); ?>"><i class="fa fa-list-alt"></i> <span>Stok barang</span></a></li>
 
-        <li class=""><a href="<?php echo site_url('member/peminjaman'); ?>"><i class="fa fa-users"></i> <span>Status Peminjaman</span></a></li>
+        <li class=""><a href="<?php echo site_url('guru/list_tugas'); ?>"><i class="fa fa-users"></i> <span>Status Peminjaman</span></a></li>
 
       </ul>
 

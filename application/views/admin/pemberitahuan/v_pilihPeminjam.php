@@ -1,4 +1,4 @@
-<?php $this->load->view('member/v_header') ?>
+<?php $this->load->view('admin/v_header') ?>
 
 <div class="row">
   <div class="col-md-12">
@@ -10,7 +10,7 @@
           <div class="col-xs-12">
             <h2 class="page-header">
               <i class="fa fa-globe"></i> Data Pinjaman
-              <small class="pull-right">Date: <?php echo $tglSkr; ?></small>
+              <small class="pull-right">Date:</small>
 
             </h2>
           </div>
@@ -21,7 +21,7 @@
           <div class="col-sm-4 invoice-col">
             From
             <address>
-              <?php foreach ($dataMember as $value): ?>
+              <?php foreach ($loadDataPeminjam as $value): ?>
                 <strong><?php echo $value->nama; ?></strong><br>
                 <?php echo $value->alamat; ?><br>
                 <?php echo $value->no_tlp; ?><br>
@@ -40,17 +40,15 @@
             </address>
           </div>
           <!-- /.col -->
-        <form class="" action="<?php echo base_url('member/kirimData') ?>" method="post">
+        <form class="" action="<?php echo base_url('admin/accOrReject') ?>" method="post">
           <div class="col-sm-4 invoice-col">
-            <input type="hidden" name="noPinjaman" value="<?php echo $noPinjaman; ?>">
-            <input type="hidden" name="tglPinjam" value="<?php echo $tglPinjam; ?>">
-            <input type="hidden" name="tglKembali" value="<?php echo $tglKembali; ?>">
-            <input type="hidden" name="tglSekarang" value="<?php echo $tglSkr.$wktSkr; ?>">
 
-            <b>Id #<?php echo $noPinjaman; ?></b><br>
-            <br>
-            <b>Tanggal Pinjam:</b> <?php echo $tglPinjam; ?><br>
-            <b>Tanggal Kembali:</b> <?php echo $tglKembali; ?><br>
+              <b>Id #<?php echo $loadDataTgl->no_pinjaman; ?></b><br>
+              <br>
+              <b>Tanggal Pinjam:</b> <?php echo $loadDataTgl->tgl_pinjam; ?><br>
+              <b>Tanggal Kembali:</b> <?php echo $loadDataTgl->tgl_kembali; ?><br>
+
+
           </div>
           <!-- /.col -->
         </div>
@@ -68,28 +66,30 @@
                 <th>No</th>
                 <th>Barang</th>
                 <th>Jumlah Barang</th>
+                <th>Stok Tersedia</th>
+                <th>Status</th>
 
               </tr>
               </thead>
               <tbody>
                 <?php $no=1; ?>
-                <?php foreach ($dataBarang as $value): ?>
-
+                <?php foreach ($loadBarang as $value): ?>
+                  <input type="hidden" name="noPinjaman[]" value="<?php echo $value->no_pinjaman; ?>">
+                  <input type="hidden" name="jmlPinjam[]" value="<?php echo $value->jml_pinjam; ?>">
+                  <input type="hidden" name="stokBarang[]" value="<?php echo $value->stok; ?>">
+                  <input type="hidden" name="noBarang[]" value="<?php echo $value->no_barang; ?>">
+                  <input type="hidden" name="diPinjam[]" value="<?php echo $value->dipinjam ?>">
               <tr>
                 <td><?php echo $no; ?></td>
                 <?php $no++; ?>
                 <td><?php echo $value->nama_barang; ?></td>
-                <td><div class="form-group">
-                  <input type="hidden" name="idBarang[]" value="<?php echo $value->no_barang; ?>">
-                <select class="form-control select2" name="jmlBarang[]" style="width: 20%;">
-                  <option selected="selected" value="1">1</option>
-                  <?php for ($i=2; $i <= $value->stok; $i++) { ?>
-                    <option value="<?php echo $i; ?>"><?php echo $i ?></option>
-                <?php  } ?>
-
-                </select>
-              </div></td>
-
+                <td><?php echo $value->jml_pinjam; ?></td>
+                <td><span class="badge bg-blue"><?php echo $value->stok; ?></span></td>
+                <td><?php if ($value->stok > $value->jml_pinjam) { ?>
+                  <span class="label label-success">Stok Tersedia</span>
+                <?php }else{ ?></td>
+                  <span class="label label-danger">Stok Tidak Tersedia</span>
+                <?php } ?>
               </tr>
               <?php endforeach; ?>
               </tbody>
@@ -118,8 +118,17 @@
         <!-- this row will not appear when printing -->
         <div class="row no-print">
           <div class="col-xs-12">
+            <?php foreach ($loadBarang as $value): ?>
+              <?php if ($value->stok > $value->jml_pinjam){ ?>
+                    <input type="submit" name="submitAccept" class="btn btn-success pull-right" value="Accept">
+                    <?php break; ?>
+              <?php }else{ ?>
+                      <input type="submit" name="submitAccept" class="btn btn-success pull-right disabled" value="Accept">
+                      <?php break; ?>
+              <?php } ?>
+            <?php endforeach; ?>
 
-            <input type="submit" class="btn btn-success pull-right" value="Kirim">
+            <input type="submit" name="submitReject" class="btn btn-danger pull-right" style="margin-right: 5px;" value="Reject">
 
           </div>
         </div>
@@ -133,4 +142,4 @@
 
 
 
-<?php $this->load->view('member/v_footer') ?>
+<?php $this->load->view('admin/v_footer') ?>

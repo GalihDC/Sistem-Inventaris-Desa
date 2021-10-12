@@ -22,7 +22,14 @@
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-check"> </i><b> Menunggu Konfirmasi</b></a></li>
                 <li><a href="#tab_2" data-toggle="tab"><i class="fa fa-history"></i><b> Riwayat Peminjaman</b></a></li>
-
+                <?php if ($cekPeminjam == 3): ?>
+                  <li class="pull-right">
+                  <form class="" action="<?php echo base_url('member/nextReject'); ?>" method="post">
+                      <input type="hidden" name="noPinjaman" value="<?php echo $no_pinjaman; ?>">
+                      <input type="submit" name="submit" class="btn btn-primary pull-right" value="Next">
+                  </form>
+                  </li>
+                <?php endif; ?>
 
               </ul>
 
@@ -32,12 +39,28 @@
                 </div>
 
                 <div class="tab-pane active" id="tab_1">
+                  <?php if ($cekPeminjam == 1) { ?>
+                    <div class="alert alert-success alert-dismissible">
 
-                  <div class="alert alert-warning alert-dismissible">
-                    
-                    <h4><i class="icon fa fa-warning"></i> Alert!</h4>
-                    Warning alert preview. This alert is dismissable.
-                  </div>
+                      <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                      Barang anda sudah dikonfirmasi oleh admin. Silankan ambil barang di Balai Desa Matesih Karangayar
+                    </div>
+                  <?php }elseif($cekPeminjam == 3){ ?>
+                    <div class="alert alert-danger alert-dismissible">
+
+                      <h4><i class="icon fa fa-danger"></i> Alert!</h4>
+                      Maaf barang anda pinjam tidak di tolak oleh admin. Jika ada yang perlu dipertanyakan bisa hubungi admin Desa Matesih Karangayar. <br>
+                      Silahkan klik tombol next untuk meminjam barang lainnya.
+                    </div>
+                  <?php }else{ ?>
+                    <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                      Anda belum melakukan peminjaman barang, silahkan klik menu stok barang untuk meminjam barang yang dibutuhkan
+                      dan ikuti setiap langkah yang ada, jika ada kendala atau masalah dalam peminjaman silahakan hubungi admin yang
+                      bersangkutan. Jadilah peminjam yang bijak dan bertanggung jawab, salam hangat dari aparatur desa Matesih Karangayar.
+                    </p>
+                  <?php } ?>
+
+
 
                 </div>
                 <!-- /.tab-pane -->

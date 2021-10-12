@@ -60,15 +60,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                  <?php $no=1; ?>
                                   <?php foreach ($barang as $b): ?>
                                     <?php if ($b->kategori == '1'){
 
                                         ?>
                                 <tr>
-                                  <td><?php echo 1 ?></td>
+                                  <td><?php echo $no; ?></td>
+                                  <?php $no++; ?>
                                   <td><?php echo $b->nama_barang; ?></td>
-                                  <td><?php echo $b->stok; ?></td>
-                                  <td><input type="checkbox" name="barang[]" class="minimal" value="<?php echo $b->no_barang; ?>"></td>
+                                  <?php if ($b->stok > 0) { ?>
+                                    <td><span class="badge bg-blue"><?php echo $b->stok; ?></span></td>
+
+                                    <td><span class="label label-success">Stok Tersedia</span></td>
+                                    <td><input type="checkbox" name="barang[]" class="minimal" value="<?php echo $b->no_barang; ?>"></td>
+                                  <?php }else{ ?>
+                                    <td><span class="badge bg-red"><?php echo $b->stok; ?></span></td>
+                                    <td><span class="label label-danger">Stok Tidak Tersedia</span></td>
+                                    <td>-</td>
+                                  <?php } ?>
                                 </tr>
                               <?php  }  ?>
                               <?php endforeach; ?>
@@ -98,17 +108,28 @@
                               <th>No</th>
                               <th>Nama Barang</th>
                               <th>Stok</th>
+                              <th>Status</th>
                               <th>Pinjam</th>
                             </tr>
                             </thead>
                             <tbody>
+                              <?php $no=1; ?>
                               <?php foreach ($barang as $b): ?>
                                 <?php if ($b->kategori == '2'){ ?>
                             <tr>
-                              <td><?php echo 1 ?></td>
+                              <td><?php echo $no; ?></td>
+                              <?php $no++; ?>
                               <td><?php echo $b->nama_barang; ?></td>
                               <td><?php echo $b->stok; ?></td>
-                              <td><input type="checkbox" name="barang[]" class="minimal" value="<?php echo $b->no_barang; ?>"></td>
+                              <?php if ($b->stok > 0) { ?>
+                                <td><span class="badge bg-blue"><?php echo $b->stok; ?></span></td>
+                                <td><span class="label label-success">Stok Tersedia</span></td>
+                                <td><input type="checkbox" name="barang[]" class="minimal" value="<?php echo $b->no_barang; ?>"></td>
+                              <?php }else{ ?>
+                                <td><span class="badge bg-red"><?php echo $b->stok; ?></span></td>
+                                <td><span class="label label-danger">Stok Tidak Tersedia</span></td>
+                                <td>-</td>
+                              <?php } ?>
                             </tr>
                           <?php } ?>
                           <?php endforeach; ?>

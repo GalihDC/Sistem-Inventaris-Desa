@@ -68,7 +68,7 @@
   <div class="col-md-12">
 
 
-
+<!-- ----------------------------------------  Modal Tambah -------------------------------------------------------------- -->
     <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-check"> </i><b> Barang Dapur</b></a></li>
@@ -79,7 +79,6 @@
           </button></li>
             </ul>
 
-<!-- ----------------------------------------  Modal Tambah -------------------------------------------------------------- -->
             <div class="modal fade" id="modal-default">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -137,7 +136,6 @@
 
 
 
-
             <div class="tab-content">
               <div class="notif">
                 <?php echo $this->session->flashdata('message'); ?>
@@ -173,10 +171,8 @@
                         <td><?php echo $b->total; ?></td>
                         <?php $urlHapus = array('admin', 'hapusBarang', $b->no_barang); ?>
                         <?php $urlEdit = array('admin', 'editBarang', $b->no_barang); ?>
-                        <td><a href="<?php echo site_url($urlEdit) ?>" type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-edit">
-                      Edit
-                    </a></td>
-                        <td><a href="<?php echo site_url($urlHapus); ?>" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td><a href="<?php echo site_url($urlHapus); ?>" class="btn btn-warning btn-sm">Edit</a></td>
+                        <td><a href="<?php echo site_url($urlEdit); ?>" class="btn btn-danger btn-sm">Delete</a></td>
                       </tr>
                     <?php  }  ?>
                     <?php endforeach; ?>
